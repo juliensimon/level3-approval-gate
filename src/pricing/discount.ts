@@ -1,6 +1,6 @@
 import { percentOf, type Cents } from '../money.ts';
 
-/** Sample tiers for the demo, highest first. */
+/** Sample tiers for the demo, highest first. Change them only with a matching change to specs/002-volume-discounts.md. */
 const TIERS = [
   { minQuantity: 100, basisPoints: 1500 },
   { minQuantity: 50, basisPoints: 1000 },
