@@ -4,6 +4,22 @@ How an AI can approve part of the changes in a repository, safely.
 
 This is a small, working sample for engineering leaders. A tiny TypeScript invoice library sits behind a real gate: a lane page that says which changes the AI may approve, a set of deterministic checks that every approval must pass, code owners for the rules themselves, and a weekly audit of the AI's decisions. Fork it, run it, and read how each piece works.
 
+## See it work
+
+Every way a change can go is an open or merged pull request in this repository. Open one and read the checks list, the Copilot review and the merge box.
+
+| Pull request | Change | Lane | What happened |
+|---|---|---|---|
+| [#1](../../pull/1) | A line added to internal docs | Green | Copilot approved, GitHub showed it mergeable, and it merged with no person reading it. One more commit first dismissed the approval, and Copilot reviewed again. |
+| [#2](../../pull/2) | A new AI prompt file | Red | Copilot only commented. The merge waited for a code owner. A second person approved and it merged. |
+| [#3](../../pull/3) | One docs line and one source comment | Amber | Copilot wrote "approval recommended". GitHub did not count it, because one file is outside the green list. Blocked. |
+| [#4](../../pull/4) | A test skipped | Amber | `suppressions` failed. Blocked. |
+| [#5](../../pull/5) | A test file deleted | Amber | `suppressions` and `tests` failed. Blocked. |
+| [#6](../../pull/6) | A complexity limit raised | Red | `ratchet` failed. Blocked. |
+| [#7](../../pull/7) | New code with no test | Amber | `lint` and `tests` failed. Blocked. |
+| [#8](../../pull/8) | A forbidden import between layers | Amber | `architecture` failed, with `lint`, `tests` and `types`. Blocked. |
+| [#9](../../pull/9) | A fake API key committed | Amber | `security` failed: gitleaks found the key. Blocked. |
+
 ## The idea
 
 When building is cheap, approval is the bottleneck. Your agents write code faster than your team reviews it. The question that sets your level is who approves.
@@ -118,16 +134,18 @@ npm run audit -- --input audit/fixtures/prs-2026-w48.json --seed 7
 
 ## Bypass test results
 
-Each row is an attempt to get a change past the gate. Procedures are in `docs/bypass-tests.md`. A cell stays `NOT YET TESTED` until you run the test and write down what you observed.
+Each row is an attempt to get a change past the gate. Procedures are in `docs/bypass-tests.md`. A result is what we observed on this repository.
 
-| Test | What you try | Result |
+| Test | Attempt | Result |
 |---|---|---|
-| Admin bypass | An administrator merges with a failing required check, or pushes straight to `main` | NOT YET TESTED |
-| Mixed-path change | One pull request changes a green file and an amber file | NOT YET TESTED |
-| New commit after approval | Push a commit after Copilot approved | NOT YET TESTED |
-| Code owner required plus Copilot approval | Copilot approves a change to a path that has a code owner | NOT YET TESTED |
-| Agent edits its own gate config | An agent identity loosens a limit in `gate/baseline.json` | NOT YET TESTED |
-| Agent deletes a test | An agent identity skips or deletes a test | NOT YET TESTED |
+| Admin bypass | An administrator merges with a failing required check, or pushes straight to `main` | Refused both times. The merge of [#4](../../pull/4) failed with "Required status check suppressions is failing", and the push to `main` was rejected by the repository rule. |
+| Mixed-path change | One pull request changes a green file and an amber file | Held. Copilot reviewed [#3](../../pull/3) and its approval did not count. The merge stayed blocked. |
+| New commit after approval | Push a commit after Copilot approved | Held. On [#1](../../pull/1) the approval was dismissed and the merge blocked until Copilot reviewed the new commit. |
+| Code owner required plus Copilot approval | Copilot approves a change to a path that has a code owner | NOT YET TESTED. On [#2](../../pull/2) the path was not on Copilot's list, so Copilot only commented and a code owner approved. |
+| Agent edits its own gate config | A change loosens a limit in `gate/baseline.json` | Held. `ratchet` failed on [#6](../../pull/6). |
+| Agent deletes a test | A change skips or deletes a test | Held. `suppressions` failed on [#4](../../pull/4) and [#5](../../pull/5). |
+
+Two more things the run showed. The Semgrep rule sets in `gate:semgrep` reported nothing on `eval`, on a shell command built from a string, or on an MD5 hash, while gitleaks caught the key. And Aikido, connected to this repository, flagged that the CI checkout left the Git token in the workflow, which the other scanners missed. Run more than one scanner.
 
 ## Develop
 
