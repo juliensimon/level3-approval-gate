@@ -9,9 +9,9 @@
     },
     "diffCoverage": 100,
     "complexity": {
-      "maxCyclomatic": 10,
-      "maxFileLines": 200,
-      "maxFunctionLines": 40
+      "maxCyclomatic": 9,
+      "maxFileLines": 190,
+      "maxFunctionLines": 29
     }
   }
 }
