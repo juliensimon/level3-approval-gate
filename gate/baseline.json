@@ -1,0 +1,17 @@
+{
+  "description": "Limits the gate enforces. The ratchet check lets each limit tighten and never loosen.",
+  "limits": {
+    "coverage": {
+      "lines": 100,
+      "functions": 100,
+      "branches": 100,
+      "statements": 100
+    },
+    "diffCoverage": 100,
+    "complexity": {
+      "maxCyclomatic": 10,
+      "maxFileLines": 200,
+      "maxFunctionLines": 40
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "ruleVersion": "1.0.0",
+  "green": ["docs/internal/**"],
+  "red": [
+    ".github/**",
+    "CODEOWNERS",
+    "**/CODEOWNERS",
+    "eslint.config.*",
+    "eslint.*.config.*",
+    "vitest.config.*",
+    "stryker.config.*",
+    "tsconfig*.json",
+    ".dependency-cruiser.*",
+    "osv-scanner.toml",
+    ".gitleaks.toml",
+    ".semgrep/**",
+    ".semgrepignore",
+    "gate/**",
+    "scripts/**",
+    "rulesets/**",
+    "LANES.md",
+    "package.json",
+    "package-lock.json",
+    "**/security/**",
+    "**/auth/**",
+    "**/secrets/**",
+    "**/permissions/**",
+    "**/migrations/**",
+    "prompts/**",
+    "evals/**"
+  ]
+}

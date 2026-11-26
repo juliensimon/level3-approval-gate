@@ -1,0 +1,46 @@
+{
+  "name": "level3-approval-gate",
+  "version": "1.0.0",
+  "description": "A sample repository that shows how an AI can approve part of the changes in a repository, safely.",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "gate:types": "tsc --noEmit",
+    "gate:tests": "vitest run --coverage",
+    "gate:diff-coverage": "tsx scripts/diff-coverage.ts",
+    "gate:lint": "eslint .",
+    "gate:complexity": "eslint --config eslint.complexity.config.js src scripts",
+    "gate:architecture": "depcruise src scripts tests --config .dependency-cruiser.cjs",
+    "gate:semgrep": "docker run --rm -v \"$PWD:/src\" -w /src semgrep/semgrep semgrep scan --config p/typescript --config p/security-audit --error --metrics=off",
+    "gate:gitleaks": "gitleaks detect --source . --redact --verbose",
+    "gate:osv": "docker run --rm -v \"$PWD:/src\" -w /src ghcr.io/google/osv-scanner --lockfile=package-lock.json",
+    "gate:suppressions": "tsx scripts/suppressions.ts",
+    "gate:ratchet": "tsx scripts/ratchet.ts",
+    "gate:lane": "tsx scripts/lane.ts",
+    "gate:local": "npm run gate:types && npm run gate:tests && npm run gate:lint && npm run gate:complexity && npm run gate:architecture && npm run gate:suppressions && npm run gate:ratchet && npm run gate:lane",
+    "audit": "tsx scripts/audit.ts",
+    "test:mutation": "stryker run"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@stryker-mutator/core": "^10.1.1",
+    "@stryker-mutator/vitest-runner": "^10.1.1",
+    "@types/node": "^22.20.7",
+    "@types/picomatch": "^4.0.3",
+    "@vitest/coverage-v8": "^5.1.2",
+    "dependency-cruiser": "^18.9.0",
+    "eslint": "^10.15.0",
+    "ignore": "^7.0.17",
+    "picomatch": "^4.0.7",
+    "tsx": "^4.23.15",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.74.0",
+    "vitest": "^5.1.2",
+    "yaml": "^2.9.1"
+  }
+}
