@@ -53,7 +53,7 @@ Hardening to evaluate:
 Measured claims:
 
 - [ ] The "30 minutes" setup target in the README has not been timed.
-- [ ] Tests, lint and the coverage run were executed on Node 26 in this repository's build. CI uses Node 22 from `.nvmrc`. Confirm on a real runner.
+- [ ] Tests, types and lint ran locally on Node 26 and on Node 22.23.5. The workflow itself has not run on a GitHub runner. Open one pull request and confirm all nine jobs.
 
 ## Open decisions
 
