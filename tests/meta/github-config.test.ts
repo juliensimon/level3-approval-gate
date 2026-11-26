@@ -120,6 +120,62 @@ describe('ruleset', () => {
     expect(checks.map((c) => c.context).sort()).toEqual([...EXPECTED_CHECKS].sort());
     expect(rule('required_status_checks')?.parameters?.['strict_required_status_checks_policy']).toBe(true);
   });
+
+  it('pins every required check to the app that may report it, so no other app can spoof it', () => {
+    const checks = rule('required_status_checks')?.parameters?.['required_status_checks'] as {
+      context: string;
+      integration_id?: unknown;
+    }[];
+    for (const check of checks) {
+      expect(Number.isInteger(check.integration_id), `${check.context} has no integration_id`).toBe(true);
+      expect(check.integration_id as number, `${check.context} has a bad integration_id`).toBeGreaterThan(0);
+    }
+    expect(new Set(checks.map((c) => c.integration_id)).size).toBe(1);
+  });
+});
+
+describe('docker images are pinned by digest', () => {
+  const VALUE_FLAGS = new Set(['-v', '--volume', '-w', '--workdir', '-e', '--env', '--entrypoint', '--name', '-u', '--user']);
+
+  /** The image of each `docker run` in a command line: the first argument that is not a flag or a flag value. */
+  function imagesIn(command: string): string[] {
+    return [...command.matchAll(/docker run([^&|;\n]*)/g)].map((match) => {
+      const tokens = (match[1] ?? '').trim().split(/\s+/);
+      let i = 0;
+      while (i < tokens.length && tokens[i]!.startsWith('-')) {
+        i += VALUE_FLAGS.has(tokens[i]!) ? 2 : 1;
+      }
+      return tokens[i] ?? '';
+    });
+  }
+
+  const workflowCommands = Object.values(workflow.jobs).flatMap((job) => job.steps.flatMap((s) => s.run ?? []));
+  const commands = [...Object.entries(scripts).map(([name, c]) => [`package.json ${name}`, c]), ...workflowCommands.map((c) => ['gate.yml', c])] as [string, string][];
+  const dockerCommands = commands.filter(([, command]) => command.includes('docker run'));
+
+  it('finds the docker commands', () => {
+    expect(dockerCommands.length).toBeGreaterThanOrEqual(3);
+  });
+
+  it.each(dockerCommands)('%s runs an image with a sha256 digest', (_where, command) => {
+    for (const image of imagesIn(command)) {
+      expect(image, `unpinned image in: ${command}`).toMatch(/^[\w./-]+@sha256:[0-9a-f]{64}$/);
+    }
+  });
+
+  it('has no placeholder digest anywhere', () => {
+    for (const [where, command] of commands) {
+      expect(command, where).not.toContain('REPLACE_WITH_DIGEST');
+    }
+  });
+
+  it('has no docker:// action and no image: key without a digest in the workflow', () => {
+    for (const line of workflowText.split('\n')) {
+      if (/docker:\/\/|^\s*image:/.test(line)) {
+        expect(line).toMatch(/@sha256:[0-9a-f]{64}/);
+      }
+    }
+  });
 });
 
 describe('the repository carries no private reference', () => {

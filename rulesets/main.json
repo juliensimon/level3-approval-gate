@@ -27,15 +27,15 @@
       "parameters": {
         "strict_required_status_checks_policy": true,
         "required_status_checks": [
-          { "context": "types" },
-          { "context": "tests" },
-          { "context": "lint" },
-          { "context": "complexity" },
-          { "context": "architecture" },
-          { "context": "security" },
-          { "context": "suppressions" },
-          { "context": "ratchet" },
-          { "context": "lane" }
+          { "context": "types", "integration_id": 15368 },
+          { "context": "tests", "integration_id": 15368 },
+          { "context": "lint", "integration_id": 15368 },
+          { "context": "complexity", "integration_id": 15368 },
+          { "context": "architecture", "integration_id": 15368 },
+          { "context": "security", "integration_id": 15368 },
+          { "context": "suppressions", "integration_id": 15368 },
+          { "context": "ratchet", "integration_id": 15368 },
+          { "context": "lane", "integration_id": 15368 }
         ]
       }
     }
