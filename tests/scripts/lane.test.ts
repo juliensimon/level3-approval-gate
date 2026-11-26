@@ -260,7 +260,7 @@ describe('the lane config and the files that carry it', () => {
       .split('\n')
       .filter((line) => line.trim() !== '' && !line.startsWith('#'));
     for (const line of lines) {
-      expect(line.split(/\s+/).slice(1)).toEqual(['@juliensimon']);
+      expect(line.split(/\s+/).slice(1)).toEqual(['@juliensimon', '@juliensolfird']);
     }
     const owned = ignore().add(lines.map((line) => line.split(/\s+/)[0]!));
     const samples = [

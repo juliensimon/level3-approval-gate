@@ -33,7 +33,7 @@ This repository is set up for step 2. The green lane is `docs/internal/**` and n
 |---|---|
 | `src/`, `tests/`, `specs/` | The sample service: invoice totals with volume discounts and tax. Five numbered specs, one acceptance test file per spec |
 | `LANES.md`, `gate/lanes.json` | The lane page and the path patterns that `scripts/lane.ts` reads |
-| `.github/CODEOWNERS` | The red lane and the gate's own files, owned by a person or a team of people (`@juliensimon` here) |
+| `.github/CODEOWNERS` | The red lane and the gate's own files, owned by a person or a team of people (`@juliensimon` and `@juliensolfird` here) |
 | `.github/workflows/gate.yml` | The gate: nine required checks, one job each |
 | `rulesets/main.json` | The branch ruleset: required checks, required review, code owner review, no force pushes, no bypass |
 | `gate/baseline.json` | The limits the gate enforces. The ratchet lets them tighten and never loosen |

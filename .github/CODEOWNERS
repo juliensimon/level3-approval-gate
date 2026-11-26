@@ -1,39 +1,40 @@
-# Owner: a person, never an agent or a bot. In your fork, replace @juliensimon with a team of people, for example @your-org/gate-owners.
+# Owners: two people, never an agent or a bot. The author of a change cannot approve it, so a second owner is needed.
+# In your fork, replace both with a team of people, for example @your-org/gate-owners.
 #
 # These are the red-lane paths from LANES.md and the files that judge a change.
 # The ruleset requires a code owner review, so a person always approves a change here.
 # Keep this file in step with gate/lanes.json. tests/scripts/lane.test.ts checks it.
 
 # Any dotfile or dot-directory at the repository root (tool configuration)
-/.*                      @juliensimon
+/.*                      @juliensimon @juliensolfird
 
 # CI, review rules and ownership
-/.github/                @juliensimon
-CODEOWNERS               @juliensimon
-/rulesets/               @juliensimon
-/LANES.md                @juliensimon
+/.github/                @juliensimon @juliensolfird
+CODEOWNERS               @juliensimon @juliensolfird
+/rulesets/               @juliensimon @juliensolfird
+/LANES.md                @juliensimon @juliensolfird
 
 # The gate's own configuration, thresholds and scripts
-/gate/                   @juliensimon
-/scripts/                @juliensimon
-/eslint.config.*         @juliensimon
-/eslint.*.config.*       @juliensimon
-/vitest.config.*         @juliensimon
-/stryker.*               @juliensimon
-/tsconfig*.json          @juliensimon
-/osv-scanner.toml        @juliensimon
+/gate/                   @juliensimon @juliensolfird
+/scripts/                @juliensimon @juliensolfird
+/eslint.config.*         @juliensimon @juliensolfird
+/eslint.*.config.*       @juliensimon @juliensolfird
+/vitest.config.*         @juliensimon @juliensolfird
+/stryker.*               @juliensimon @juliensolfird
+/tsconfig*.json          @juliensimon @juliensolfird
+/osv-scanner.toml        @juliensimon @juliensolfird
 
 # Dependencies
-/package.json            @juliensimon
-/package-lock.json       @juliensimon
+/package.json            @juliensimon @juliensolfird
+/package-lock.json       @juliensimon @juliensolfird
 
 # Security, permissions and data
-security/                @juliensimon
-auth/                    @juliensimon
-secrets/                 @juliensimon
-permissions/             @juliensimon
-migrations/              @juliensimon
+security/                @juliensimon @juliensolfird
+auth/                    @juliensimon @juliensolfird
+secrets/                 @juliensimon @juliensolfird
+permissions/             @juliensimon @juliensolfird
+migrations/              @juliensimon @juliensolfird
 
 # AI features: prompts and evaluation sets
-/prompts/                @juliensimon
-/evals/                  @juliensimon
+/prompts/                @juliensimon @juliensolfird
+/evals/                  @juliensimon @juliensolfird
