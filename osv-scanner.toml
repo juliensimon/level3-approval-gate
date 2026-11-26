@@ -1,0 +1,5 @@
+# Dev-only transitive dependency of the mutation testing tool (Stryker). No fix is published at the time of writing.
+# Review this entry on every dependency update and remove it when a fixed version exists.
+[[IgnoredVulns]]
+id = "GHSA-g3hv-75wg-m249"
+reason = "minimatch denial of service via a transitive dev dependency of Stryker. It never runs on untrusted input and never ships."

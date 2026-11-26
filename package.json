@@ -17,7 +17,7 @@
     "gate:complexity": "eslint --config eslint.complexity.config.js src scripts",
     "gate:architecture": "depcruise src scripts tests --config .dependency-cruiser.cjs",
     "gate:semgrep": "docker run --rm -v \"$PWD:/src\" -w /src semgrep/semgrep semgrep scan --config p/typescript --config p/security-audit --error --metrics=off",
-    "gate:gitleaks": "gitleaks detect --source . --redact --verbose",
+    "gate:gitleaks": "docker run --rm -v \"$PWD:/repo\" ghcr.io/gitleaks/gitleaks detect --source /repo --redact --verbose",
     "gate:osv": "docker run --rm -v \"$PWD:/src\" -w /src ghcr.io/google/osv-scanner --lockfile=package-lock.json",
     "gate:suppressions": "tsx scripts/cli.ts suppressions --base ${DIFF_BASE:-origin/main}",
     "gate:ratchet": "tsx scripts/cli.ts ratchet --base ${DIFF_BASE:-origin/main}",
