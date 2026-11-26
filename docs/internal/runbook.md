@@ -26,7 +26,7 @@ npm run gate:local
 
 ## Who to ask
 
-The gate owners named in `.github/CODEOWNERS` own the rules. Any engineer can ask for a human review of any change.
+The gate owners named in `.github/CODEOWNERS` own the rules. Any engineer can ask for a human review of any change. Ask in the engineering channel if a check result is unclear.
 
 ## Reading a gate result
 
