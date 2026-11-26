@@ -141,7 +141,7 @@ Each row is an attempt to get a change past the gate. Procedures are in `docs/by
 | Admin bypass | An administrator merges with a failing required check, or pushes straight to `main` | Refused both times. The merge of [#4](../../pull/4) failed with "Required status check suppressions is failing", and the push to `main` was rejected by the repository rule. |
 | Mixed-path change | One pull request changes a green file and an amber file | Held. Copilot reviewed [#3](../../pull/3) and its approval did not count. The merge stayed blocked. |
 | New commit after approval | Push a commit after Copilot approved | Held. On [#1](../../pull/1) the approval was dismissed and the merge blocked until Copilot reviewed the new commit. |
-| Code owner required plus Copilot approval | Copilot approves a change to a path that has a code owner | NOT YET TESTED. On [#2](../../pull/2) the path was not on Copilot's list, so Copilot only commented and a code owner approved. |
+| Code owner required plus Copilot approval | Copilot approves a change to a path that has a code owner | Held. With `prompts/**` on Copilot's path list, Copilot approved [#12](../../pull/12) and GitHub still blocked the merge. A Copilot approval does not replace a code owner. |
 | Agent edits its own gate config | A change loosens a limit in `gate/baseline.json` | Held. `ratchet` failed on [#6](../../pull/6). |
 | Agent deletes a test | A change skips or deletes a test | Held. `suppressions` failed on [#4](../../pull/4) and [#5](../../pull/5). |
 
