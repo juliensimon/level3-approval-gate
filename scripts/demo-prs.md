@@ -1,6 +1,6 @@
 # Demo pull requests
 
-Four scenarios to open on GitHub, after review, in this order. Create each branch from `main`. Nothing here has been run on GitHub. The "Expected" lines state what the gate is built to do. Write what you observe in the README results table and in the pull request.
+Four scenarios to reproduce on your fork, in this order. Create each branch from `main`. All nine pull requests that ran in this repository, with what GitHub did, are in the README table. The "Expected" lines state what the gate is built to do. On your fork, write what you observe in the pull request.
 
 Use an identity that is not a gate owner as the author.
 
