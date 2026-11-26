@@ -1,4 +1,4 @@
-import type { Io } from './io.ts';
+import { errorMessage, type Io } from './io.ts';
 
 export interface Baseline {
   limits: {
@@ -98,7 +98,7 @@ export function main(argv: readonly string[], io: Io): number {
     }
     return 1;
   } catch (error) {
-    io.err(error instanceof Error ? error.message : String(error));
+    io.err(errorMessage(error));
     return 2;
   }
 }

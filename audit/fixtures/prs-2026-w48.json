@@ -1,0 +1,343 @@
+{
+  "weekOf": "2026-11-23",
+  "source": "fixture",
+  "note": "Sample data for the demo. Not real pull requests.",
+  "pullRequests": [
+    {
+      "number": 101,
+      "title": "Fix typo in on-call runbook",
+      "lane": "green",
+      "aiApproved": true,
+      "approver": "copilot (AI approver)",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.05,
+      "verdict": "correct"
+    },
+    {
+      "number": 102,
+      "title": "Add escalation contacts section to runbook",
+      "lane": "green",
+      "aiApproved": true,
+      "approver": "copilot (AI approver)",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.1,
+      "verdict": "correct"
+    },
+    {
+      "number": 103,
+      "title": "Reword release checklist",
+      "lane": "green",
+      "aiApproved": true,
+      "approver": "copilot (AI approver)",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.12,
+      "verdict": "correct"
+    },
+    {
+      "number": 104,
+      "title": "Document how to rotate the staging credentials",
+      "lane": "green",
+      "aiApproved": true,
+      "approver": "copilot (AI approver)",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.52,
+      "verdict": "correct"
+    },
+    {
+      "number": 105,
+      "title": "Describe the rollback procedure",
+      "lane": "green",
+      "aiApproved": true,
+      "approver": "copilot (AI approver)",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.44,
+      "verdict": "correct"
+    },
+    {
+      "number": 106,
+      "title": "Explain the invoice rounding rule for new engineers",
+      "lane": "green",
+      "aiApproved": true,
+      "approver": "copilot (AI approver)",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.31,
+      "verdict": "correct"
+    },
+    {
+      "number": 107,
+      "title": "Add glossary of billing terms",
+      "lane": "green",
+      "aiApproved": true,
+      "approver": "copilot (AI approver)",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.18,
+      "verdict": "correct"
+    },
+    {
+      "number": 108,
+      "title": "Update the architecture overview diagram notes",
+      "lane": "green",
+      "aiApproved": true,
+      "approver": "copilot (AI approver)",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.07,
+      "verdict": "correct"
+    },
+    {
+      "number": 109,
+      "title": "Rename a local variable in the tax module",
+      "lane": "amber",
+      "aiApproved": false,
+      "approver": "person:reviewer-a",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.35,
+      "verdict": "correct"
+    },
+    {
+      "number": 110,
+      "title": "Change the volume discount tiers",
+      "lane": "amber",
+      "aiApproved": false,
+      "approver": "person:reviewer-b",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.62,
+      "verdict": "correct"
+    },
+    {
+      "number": 111,
+      "title": "Add a README badge",
+      "lane": "amber",
+      "aiApproved": false,
+      "approver": "person:reviewer-a",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.12,
+      "verdict": "correct"
+    },
+    {
+      "number": 112,
+      "title": "Fix a comment in the money module",
+      "lane": "amber",
+      "aiApproved": false,
+      "approver": "person:reviewer-b",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.2,
+      "verdict": "correct"
+    },
+    {
+      "number": 113,
+      "title": "Tighten the complexity limit",
+      "lane": "red",
+      "aiApproved": false,
+      "approver": "person:gate-owner-a",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.95,
+      "verdict": "correct"
+    },
+    {
+      "number": 114,
+      "title": "Update the CI workflow",
+      "lane": "red",
+      "aiApproved": false,
+      "approver": "person:gate-owner-b",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.88,
+      "verdict": "correct"
+    },
+    {
+      "number": 115,
+      "title": "Add a unit test for rounding",
+      "lane": "amber",
+      "aiApproved": false,
+      "approver": "person:reviewer-a",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.28,
+      "verdict": "correct"
+    },
+    {
+      "number": 116,
+      "title": "Edit the summary prompt",
+      "lane": "red",
+      "aiApproved": false,
+      "approver": "person:gate-owner-a",
+      "checks": {
+        "types": "pass",
+        "tests": "pass",
+        "lint": "pass",
+        "complexity": "pass",
+        "architecture": "pass",
+        "security": "pass",
+        "suppressions": "pass",
+        "ratchet": "pass",
+        "lane": "pass"
+      },
+      "ruleVersion": "1.0.0",
+      "redProximity": 0.97,
+      "verdict": "correct"
+    }
+  ]
+}

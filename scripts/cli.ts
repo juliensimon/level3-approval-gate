@@ -16,8 +16,12 @@ import { main as suppressions } from './suppressions.ts';
 const root = join(import.meta.dirname, '..');
 
 const io: Io = {
-  out: (line) => console.log(line),
-  err: (line) => console.error(line),
+  out: (line) => {
+    console.log(line);
+  },
+  err: (line) => {
+    console.error(line);
+  },
   readFile: (path) => readFileSync(join(root, path), 'utf8'),
   writeFile: (path, content) => {
     mkdirSync(dirname(join(root, path)), { recursive: true });

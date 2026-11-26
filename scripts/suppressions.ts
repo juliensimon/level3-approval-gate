@@ -1,4 +1,4 @@
-import type { Io } from './io.ts';
+import { errorMessage, type Io } from './io.ts';
 
 export interface Finding {
   file: string;
@@ -32,28 +32,43 @@ interface FileDiff {
   removed: string[];
 }
 
+interface ParseState {
+  current: FileDiff | undefined;
+  oldPath: string;
+  inHunk: boolean;
+}
+
+function applyHeader(line: string, state: ParseState, files: FileDiff[]): void {
+  if (line.startsWith('--- ')) {
+    state.oldPath = line.slice(4).replace(/^a\//, '');
+  } else if (line.startsWith('+++ ')) {
+    const deleted = line === '+++ /dev/null';
+    const file = deleted ? state.oldPath : line.slice(4).replace(/^b\//, '');
+    state.current = { file, deleted, added: [], removed: [] };
+    files.push(state.current);
+  }
+}
+
+function applyLine(line: string, state: ParseState, files: FileDiff[]): void {
+  if (line.startsWith('diff --git ')) {
+    state.inHunk = false;
+    state.current = undefined;
+  } else if (line.startsWith('@@')) {
+    state.inHunk = true;
+  } else if (!state.inHunk) {
+    applyHeader(line, state, files);
+  } else if (line.startsWith('+')) {
+    state.current?.added.push(line.slice(1));
+  } else if (line.startsWith('-')) {
+    state.current?.removed.push(line.slice(1));
+  }
+}
+
 function parseDiff(diff: string): FileDiff[] {
   const files: FileDiff[] = [];
-  let current: FileDiff | undefined;
-  let oldPath = '';
-  let inHunk = false;
+  const state: ParseState = { current: undefined, oldPath: '', inHunk: false };
   for (const line of diff.split('\n')) {
-    if (line.startsWith('diff --git ')) {
-      inHunk = false;
-      current = undefined;
-    } else if (inHunk && line.startsWith('+')) {
-      current?.added.push(line.slice(1));
-    } else if (inHunk && line.startsWith('-')) {
-      current?.removed.push(line.slice(1));
-    } else if (line.startsWith('@@')) {
-      inHunk = true;
-    } else if (!inHunk && line.startsWith('--- ')) {
-      oldPath = line.slice(4).replace(/^a\//, '');
-    } else if (!inHunk && line.startsWith('+++ ')) {
-      const deleted = line === '+++ /dev/null';
-      current = { file: deleted ? oldPath : line.slice(4).replace(/^b\//, ''), deleted, added: [], removed: [] };
-      files.push(current);
-    }
+    applyLine(line, state, files);
   }
   return files;
 }
@@ -128,7 +143,7 @@ export function main(argv: readonly string[], io: Io): number {
     }
     return 1;
   } catch (error) {
-    io.err(error instanceof Error ? error.message : String(error));
+    io.err(errorMessage(error));
     return 2;
   }
 }

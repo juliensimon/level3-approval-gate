@@ -1,4 +1,4 @@
-import type { Io } from './io.ts';
+import { errorMessage, type Io } from './io.ts';
 
 export function buildCommand(base: string, failUnder: number): { command: string; args: string[] } {
   return {
@@ -25,7 +25,7 @@ export function main(argv: readonly string[], io: Io): number {
     const { command, args } = buildCommand(base, limit);
     return io.run(command, args);
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
+    const message = errorMessage(error);
     io.err(message);
     if ((error as { code?: string }).code === 'ENOENT') {
       io.err('diff-cover is not installed. Run: pip install diff-cover');

@@ -1,5 +1,5 @@
 import picomatch from 'picomatch';
-import type { Io } from './io.ts';
+import { errorMessage, type Io } from './io.ts';
 
 export type Lane = 'green' | 'amber' | 'red';
 
@@ -112,7 +112,7 @@ export function main(argv: readonly string[], io: Io): number {
     io.out(args.json ? JSON.stringify(result, null, 2) : result.lane);
     return 0;
   } catch (error) {
-    io.err(error instanceof Error ? error.message : String(error));
+    io.err(errorMessage(error));
     return 2;
   }
 }
