@@ -30,7 +30,7 @@ Do these on a throwaway repository first.
 
 These points are not in the fact set above. Test each one on the throwaway repository and write the result in the README table. Until then, do not rely on them.
 
-- **UNVERIFIED: CODEOWNERS.** How a Copilot approval behaves on a path that has a code owner. The design assumes a person from the gate owners must still approve red paths. Bypass test 4 checks it.
-- **UNVERIFIED: personal accounts.** Whether Copilot approvals are available to a repository in a personal account, outside an organization or enterprise.
+- **VERIFIED: CODEOWNERS.** A Copilot approval does not replace a code owner. In [#12](../../pull/12), `prompts/**` was on Copilot's path list, Copilot approved, and GitHub still blocked the merge. Even so, keep code-owned paths off Copilot's list: a Copilot approval on them adds nothing.
+- **VERIFIED: personal accounts.** Copilot approvals are available on a public repository in a personal account with a Copilot Pro plan. The repository settings show one switch, "Allow Copilot to approve pull requests", and a path box.
 - **UNVERIFIED: mixed paths.** Whether an approval counts only when every changed file matches a configured path. The design depends on it. Bypass test 2 checks it.
 - **UNVERIFIED: new commits.** Whether a new commit dismisses a Copilot approval. Bypass test 3 checks it.

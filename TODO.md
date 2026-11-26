@@ -34,8 +34,8 @@ CODEOWNERS:
 
 Copilot approvals (`docs/copilot-approval.md`):
 
-- [ ] How a Copilot approval behaves on a path that has a code owner.
-- [ ] Whether Copilot approvals are available on a personal account.
+- [x] How a Copilot approval behaves on a path that has a code owner. Tested in [#12](../../pull/12): Copilot approved, and the merge stayed blocked until a code owner approved.
+- [x] Whether Copilot approvals are available on a personal account. Yes, on a public repository with a Copilot Pro plan. The settings page shows one switch and a path box.
 - [ ] That an approval counts only when every changed file matches a configured path.
 - [ ] That a new commit dismisses a Copilot approval.
 
