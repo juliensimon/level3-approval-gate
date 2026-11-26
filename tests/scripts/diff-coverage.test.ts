@@ -57,6 +57,18 @@ describe('main', () => {
     expect(io.stderr.join('\n')).toContain('pip install diff-cover');
   });
 
+  it('exits 2 and shows the message when diff-cover fails to start for another reason', () => {
+    const io = fakeIo({
+      files: { 'gate/baseline.json': baseline },
+      run: () => {
+        throw new Error('permission denied');
+      },
+    });
+    expect(main([], io)).toBe(2);
+    expect(io.stderr.join('\n')).toContain('permission denied');
+    expect(io.stderr.join('\n')).not.toContain('pip install');
+  });
+
   it('exits 2 when --base has no value', () => {
     expect(main(['--base'], fakeIo({ files: { 'gate/baseline.json': baseline } }))).toBe(2);
   });

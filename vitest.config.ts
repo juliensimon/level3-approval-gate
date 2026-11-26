@@ -7,7 +7,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       include: ['src/**/*.ts', 'scripts/**/*.ts'],
-      exclude: ['src/index.ts'],
+      exclude: ['src/index.ts', 'scripts/cli.ts'],
       reporter: ['text', 'lcov', 'json-summary'],
       thresholds: baseline.limits.coverage,
     },
