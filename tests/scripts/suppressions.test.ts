@@ -13,6 +13,9 @@ const GITLEAKS_ALLOW = ['gitleaks', 'allow'].join(':');
 const SKIP = ['.', 'skip'].join('');
 const ONLY = ['.', 'only'].join('');
 const TODO = ['.', 'todo'].join('');
+const C8_IGNORE = ['c8', 'ignore'].join(' ');
+const ISTANBUL_IGNORE = ['istanbul', 'ignore'].join(' ');
+const X = 'x';
 
 function diff(file: string, added: string[], removed: string[] = [], deleted = false): string {
   return [
@@ -37,8 +40,8 @@ describe('new suppressions in code', () => {
     [`// ${TS_EXPECT} reason`, 'ts-suppression'],
     [`// ${TS_NOCHECK}`, 'ts-suppression'],
     [`/* ${V8_IGNORE} next */`, 'coverage-ignore'],
-    [`// c8 ignore next`, 'coverage-ignore'],
-    [`/* istanbul ignore next */`, 'coverage-ignore'],
+    [`// ${C8_IGNORE} next`, 'coverage-ignore'],
+    [`/* ${ISTANBUL_IGNORE} next */`, 'coverage-ignore'],
     [`// ${SEMGREP_OFF}: rule-id`, 'scanner-suppression'],
     [`const key = 'x'; // ${GITLEAKS_ALLOW}`, 'scanner-suppression'],
   ])('flags %s', (line, rule) => {
@@ -83,10 +86,10 @@ describe('skipped and deleted tests', () => {
     `describe${SKIP}('a', () => {});`,
     `it${TODO}('a');`,
     `it${ONLY}('a', () => {});`,
-    `xit('a', () => {});`,
-    `xdescribe('a', () => {});`,
-    `xtest('a', () => {});`,
-    `it.skipIf(cond)('a', () => {});`,
+    `${X}it('a', () => {});`,
+    `${X}describe('a', () => {});`,
+    `${X}test('a', () => {});`,
+    `it${SKIP}If(cond)('a', () => {});`,
   ])('flags %s in a test file', (line) => {
     expect(rules(diff('tests/a.test.ts', [line]))).toEqual(['skipped-test']);
   });
