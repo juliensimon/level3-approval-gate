@@ -44,7 +44,7 @@ function priceLine(line: LineInput): LineResult {
     quantity: line.quantity,
     lineTotalCents: total,
     discountCents: discount,
-    netCents: total - discount,
+    netCents: assertInRange(total - discount),
   };
 }
 
@@ -62,7 +62,7 @@ export function computeInvoice(input: InvoiceInput): InvoiceResult {
   const lines = input.lines.map(priceLine);
   const subtotalCents = sum(lines.map((l) => l.lineTotalCents));
   const discountCents = sum(lines.map((l) => l.discountCents));
-  const taxableCents = subtotalCents - discountCents;
+  const taxableCents = assertInRange(subtotalCents - discountCents);
   const taxCents = calculateTax(taxableCents, input.taxRateBasisPoints);
   return {
     currency: input.currency,
@@ -71,6 +71,6 @@ export function computeInvoice(input: InvoiceInput): InvoiceResult {
     discountCents,
     taxableCents,
     taxCents,
-    totalCents: taxableCents + taxCents,
+    totalCents: assertInRange(taxableCents + taxCents),
   };
 }
