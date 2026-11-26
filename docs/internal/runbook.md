@@ -27,3 +27,7 @@ npm run gate:local
 ## Who to ask
 
 The gate owners named in `.github/CODEOWNERS` own the rules. Any engineer can ask for a human review of any change.
+
+## Reading a gate result
+
+Each check reports one line in the pull request. Open the failing check, read the first error, and fix the cause. Do not add a suppression to make a check pass.
