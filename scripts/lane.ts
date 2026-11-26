@@ -28,17 +28,15 @@ const MATCH_OPTIONS = { dot: true, nocase: true };
 /** Returns a clean repository-relative path, or null when the path cannot be trusted. */
 export function normalizePath(path: string): string | null {
   const trimmed = path.startsWith('./') ? path.slice(2) : path;
-  if (trimmed === '' || trimmed.startsWith('/') || trimmed.includes('\\')) {
-    return null;
-  }
-  if (trimmed.split('/').some((segment) => segment === '..' || segment === '.' || segment === '')) {
+  const unsafe = ['', '.', '..'];
+  if (trimmed.includes('\\') || trimmed.split('/').some((segment) => unsafe.includes(segment))) {
     return null;
   }
   return trimmed;
 }
 
 function matches(patterns: readonly string[], path: string): boolean {
-  return patterns.length > 0 && picomatch.isMatch(path, [...patterns], MATCH_OPTIONS);
+  return picomatch.isMatch(path, [...patterns], MATCH_OPTIONS);
 }
 
 /**
@@ -57,11 +55,8 @@ export function classifyFile(path: string, config: LaneConfig): Lane {
 /** A change takes the strictest lane of its files. A change with no files goes to a person. */
 export function classifyChange(paths: readonly string[], config: LaneConfig): ChangeLane {
   const files = paths.map((path) => ({ path, lane: classifyFile(path, config) }));
-  const lane = files.reduce<Lane>(
-    (strictest, file) => (STRICTNESS[file.lane] > STRICTNESS[strictest] ? file.lane : strictest),
-    files.length === 0 ? 'amber' : 'green',
-  );
-  return { lane, ruleVersion: config.ruleVersion, files };
+  const strictestFirst = files.map((file) => file.lane).sort((a, b) => STRICTNESS[b] - STRICTNESS[a]);
+  return { lane: strictestFirst[0] ?? 'amber', ruleVersion: config.ruleVersion, files };
 }
 
 interface Args {
@@ -95,6 +90,9 @@ function parseArgs(argv: readonly string[]): Args | string {
 function changedFiles(args: Args, io: Io): string[] {
   if (args.base === undefined) {
     return args.files;
+  }
+  if (args.files.length > 0) {
+    throw new Error('Give file names or --base, not both.');
   }
   const raw = io.git(['diff', '-z', '--name-only', '--no-renames', `${args.base}...HEAD`]);
   return raw.split('\0').filter((name) => name !== '');

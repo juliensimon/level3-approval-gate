@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import ignore from 'ignore';
+import picomatch from 'picomatch';
 import {
   classifyChange,
   classifyFile,
@@ -22,7 +23,7 @@ describe('normalizePath', () => {
     expect(normalizePath(input)).toBe(expected);
   });
 
-  it.each(['', '/etc/passwd', '../x.md', 'docs/../.github/x.yml', 'docs\\internal\\a.md', 'a/./b'])(
+  it.each(['', '/etc/passwd', '../x.md', 'docs/../.github/x.yml', 'docs\\internal\\a.md', 'a/./b', 'a//b', 'docs/internal/', '//x'])(
     'rejects %j',
     (input) => {
       expect(normalizePath(input)).toBeNull();
@@ -121,6 +122,23 @@ describe('classifyFile', () => {
   });
 });
 
+describe('the red list names each tool-configuration file on its own', () => {
+  // These paths are also red through the unknown-dotfile rule. The explicit entries stay,
+  // so a change to that rule cannot move them out of the red lane unnoticed.
+  it.each(['.npmrc', '.yarnrc', '.yarnrc.yml', '.nvmrc', '.node-version', '.husky/pre-commit', 'stryker.config.json', 'stryker.ci.conf.mjs'])(
+    '%s matches a red pattern',
+    (path) => {
+      expect(picomatch.isMatch(path, [...config.red], { dot: true, nocase: true })).toBe(true);
+    },
+  );
+});
+
+describe('a config with empty lists', () => {
+  it('puts every readable path in amber', () => {
+    expect(classifyFile('src/a.ts', { ruleVersion: 't', green: [], red: [] })).toBe('amber');
+  });
+});
+
 describe('classifyChange', () => {
   it('is green when every file is green', () => {
     const result = classifyChange(['docs/internal/a.md', 'docs/internal/b/c.md'], config);
@@ -176,6 +194,30 @@ describe('main', () => {
     });
     expect(main(['--base', 'origin/main'], io)).toBe(0);
     expect(io.stdout).toEqual(['red']);
+  });
+
+  it('keeps reading options after the --base value', () => {
+    const io = fakeIo({
+      files: { 'gate/lanes.json': JSON.stringify(config) },
+      git: () => 'docs/internal/a.md\0',
+    });
+    expect(main(['--base', 'origin/main', '--json'], io)).toBe(0);
+    expect(JSON.parse(io.stdout.join('\n'))).toMatchObject({ lane: 'green' });
+  });
+
+  it('ignores the empty entry that ends the git output', () => {
+    const io = fakeIo({
+      files: { 'gate/lanes.json': JSON.stringify(config) },
+      git: () => 'docs/internal/a.md\0docs/internal/b.md\0',
+    });
+    main(['--base', 'origin/main'], io);
+    expect(io.stdout).toEqual(['green']);
+  });
+
+  it('exits 2 when both --base and file names are given', () => {
+    const io = fakeIo({ files: { 'gate/lanes.json': JSON.stringify(config) } });
+    expect(main(['--base', 'origin/main', 'a.md'], io)).toBe(2);
+    expect(io.stderr.join('\n')).toContain('not both');
   });
 
   it('prints JSON with --json', () => {
