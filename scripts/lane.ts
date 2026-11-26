@@ -72,9 +72,11 @@ interface Args {
 
 function parseArgs(argv: readonly string[]): Args | string {
   const args: Args = { json: false, files: [] };
-  for (let i = 0; i < argv.length; i += 1) {
-    const arg = argv[i]!;
-    if (arg === '--json') {
+  let skipNext = false;
+  for (const [i, arg] of argv.entries()) {
+    if (skipNext) {
+      skipNext = false;
+    } else if (arg === '--json') {
       args.json = true;
     } else if (arg === '--base') {
       const value = argv[i + 1];
@@ -82,7 +84,7 @@ function parseArgs(argv: readonly string[]): Args | string {
         return '--base needs a value.';
       }
       args.base = value;
-      i += 1;
+      skipNext = true;
     } else {
       args.files.push(arg);
     }
