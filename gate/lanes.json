@@ -1,6 +1,8 @@
 {
   "ruleVersion": "1.0.0",
-  "green": ["docs/internal/**"],
+  "green": [
+    "docs/internal/**"
+  ],
   "red": [
     ".github/**",
     "CODEOWNERS",
@@ -8,8 +10,13 @@
     "eslint.config.*",
     "eslint.*.config.*",
     "vitest.config.*",
-    "stryker.config.*",
+    "stryker.*",
     "tsconfig*.json",
+    ".npmrc",
+    ".yarnrc*",
+    ".nvmrc",
+    ".node-version",
+    ".husky/**",
     ".dependency-cruiser.*",
     "osv-scanner.toml",
     ".gitleaks.toml",

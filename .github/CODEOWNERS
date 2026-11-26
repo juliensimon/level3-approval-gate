@@ -1,0 +1,40 @@
+# PLACEHOLDER: replace every @OWNER/gate-owners with your real team, for example @your-org/gate-owners.
+# The team must hold write access to the repository and contain people, never an agent or a bot.
+#
+# These are the red-lane paths from LANES.md and the files that judge a change.
+# The ruleset requires a code owner review, so a person always approves a change here.
+# Keep this file in step with gate/lanes.json. tests/scripts/lane.test.ts checks it.
+
+# Any dotfile or dot-directory at the repository root (tool configuration)
+/.*                      @OWNER/gate-owners
+
+# CI, review rules and ownership
+/.github/                @OWNER/gate-owners
+CODEOWNERS               @OWNER/gate-owners
+/rulesets/               @OWNER/gate-owners
+/LANES.md                @OWNER/gate-owners
+
+# The gate's own configuration, thresholds and scripts
+/gate/                   @OWNER/gate-owners
+/scripts/                @OWNER/gate-owners
+/eslint.config.*         @OWNER/gate-owners
+/eslint.*.config.*       @OWNER/gate-owners
+/vitest.config.*         @OWNER/gate-owners
+/stryker.*               @OWNER/gate-owners
+/tsconfig*.json          @OWNER/gate-owners
+/osv-scanner.toml        @OWNER/gate-owners
+
+# Dependencies
+/package.json            @OWNER/gate-owners
+/package-lock.json       @OWNER/gate-owners
+
+# Security, permissions and data
+security/                @OWNER/gate-owners
+auth/                    @OWNER/gate-owners
+secrets/                 @OWNER/gate-owners
+permissions/             @OWNER/gate-owners
+migrations/              @OWNER/gate-owners
+
+# AI features: prompts and evaluation sets
+/prompts/                @OWNER/gate-owners
+/evals/                  @OWNER/gate-owners
