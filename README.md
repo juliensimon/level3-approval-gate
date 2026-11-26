@@ -39,7 +39,7 @@ Each step waits for clean weekly audits.
 | 1. Advisory | Nothing. It attaches an assessment to each pull request, and people approve everything. | Lane page, weekly audit, required CI checks |
 | 2. Internal documentation | Changes to internal documentation only | Protected rules and a signed lane page |
 | 3. Small UI and test-only changes | Add one category at a time | Acceptance tests with every spec |
-| 4. A risk score inside amber | Low-risk changes in categories you open | A replay of past pull requests, then a shadow run |
+| 4. A risk score inside amber | Low-risk changes in categories you open | A score check on past reverted and fixed pull requests, then a shadow run |
 
 This repository is set up for step 2. The green lane is `docs/internal/**` and nothing else.
 
@@ -57,8 +57,8 @@ This repository is set up for step 2. The green lane is `docs/internal/**` and n
 | `audit/` | The audit fixture and one filled example record |
 | `policy/change-management-clause.md` | A paste-ready clause that names the gate as an approving control |
 | `docs/` | Copilot approval setup, Aikido, bypass tests, an internal runbook (green lane) |
-| `scripts/demo-prs.md` | Four pull requests to open to see the gate work |
-| `TODO.md` | What to replace, pin and verify before you publish |
+| `scripts/demo-prs.md` | Step-by-step instructions to reproduce four of the demo pull requests on your fork |
+| `TODO.md` | What a fork must replace, and what is still open |
 
 ## The gate
 

@@ -1,6 +1,6 @@
 # Bypass tests
 
-Six attempts to get a change past the gate. Run them on a throwaway repository, then write each result in the README table. A result is what you observed. Do not fill a cell from this page.
+Six attempts to get a change past the gate. Run them on a throwaway repository, then write each result in the README table. A result is what you observed. Do not fill a cell from this page. The results on this repository are in the README bypass table.
 
 For each test, "Pass means" says what the gate is built to do. If you observe something else, the result is a failure and the setup needs a fix before any real change depends on it.
 
@@ -24,7 +24,7 @@ For each test, "Pass means" says what the gate is built to do. If you observe so
 
 - **Do:** Open a pull request that changes `prompts/invoice-summary.md` and get a Copilot approval on it.
 - **Pass means:** The merge stays blocked until a member of the gate owners team approves, because the path has a code owner.
-- **UNVERIFIED:** how a Copilot approval behaves on a path with a code owner. This test is the check.
+- **Result on this repository:** held. Copilot approved [#12](../../pull/12) and the merge stayed blocked until a code owner approved.
 
 ## 5. Agent edits its own gate config
 
