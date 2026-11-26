@@ -1,40 +1,39 @@
-# PLACEHOLDER: replace every @OWNER/gate-owners with your real team, for example @your-org/gate-owners.
-# The team must hold write access to the repository and contain people, never an agent or a bot.
+# Owner: a person, never an agent or a bot. In your fork, replace @juliensimon with a team of people, for example @your-org/gate-owners.
 #
 # These are the red-lane paths from LANES.md and the files that judge a change.
 # The ruleset requires a code owner review, so a person always approves a change here.
 # Keep this file in step with gate/lanes.json. tests/scripts/lane.test.ts checks it.
 
 # Any dotfile or dot-directory at the repository root (tool configuration)
-/.*                      @OWNER/gate-owners
+/.*                      @juliensimon
 
 # CI, review rules and ownership
-/.github/                @OWNER/gate-owners
-CODEOWNERS               @OWNER/gate-owners
-/rulesets/               @OWNER/gate-owners
-/LANES.md                @OWNER/gate-owners
+/.github/                @juliensimon
+CODEOWNERS               @juliensimon
+/rulesets/               @juliensimon
+/LANES.md                @juliensimon
 
 # The gate's own configuration, thresholds and scripts
-/gate/                   @OWNER/gate-owners
-/scripts/                @OWNER/gate-owners
-/eslint.config.*         @OWNER/gate-owners
-/eslint.*.config.*       @OWNER/gate-owners
-/vitest.config.*         @OWNER/gate-owners
-/stryker.*               @OWNER/gate-owners
-/tsconfig*.json          @OWNER/gate-owners
-/osv-scanner.toml        @OWNER/gate-owners
+/gate/                   @juliensimon
+/scripts/                @juliensimon
+/eslint.config.*         @juliensimon
+/eslint.*.config.*       @juliensimon
+/vitest.config.*         @juliensimon
+/stryker.*               @juliensimon
+/tsconfig*.json          @juliensimon
+/osv-scanner.toml        @juliensimon
 
 # Dependencies
-/package.json            @OWNER/gate-owners
-/package-lock.json       @OWNER/gate-owners
+/package.json            @juliensimon
+/package-lock.json       @juliensimon
 
 # Security, permissions and data
-security/                @OWNER/gate-owners
-auth/                    @OWNER/gate-owners
-secrets/                 @OWNER/gate-owners
-permissions/             @OWNER/gate-owners
-migrations/              @OWNER/gate-owners
+security/                @juliensimon
+auth/                    @juliensimon
+secrets/                 @juliensimon
+permissions/             @juliensimon
+migrations/              @juliensimon
 
 # AI features: prompts and evaluation sets
-/prompts/                @OWNER/gate-owners
-/evals/                  @OWNER/gate-owners
+/prompts/                @juliensimon
+/evals/                  @juliensimon

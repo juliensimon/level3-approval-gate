@@ -21,7 +21,7 @@ jobs:
     name: types
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: ./.github/actions/setup
       - run: npm run gate:types
 
@@ -29,19 +29,19 @@ jobs:
     name: tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
       - run: npm run gate:tests
-      - run: pip install diff-cover
+      - run: pip install diff-cover==11.0.4
       - run: npm run gate:diff-coverage
 
   lint:
     name: lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: ./.github/actions/setup
       - run: npm run gate:lint
 
@@ -49,7 +49,7 @@ jobs:
     name: complexity
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: ./.github/actions/setup
       - run: npm run gate:complexity
 
@@ -57,7 +57,7 @@ jobs:
     name: architecture
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
       - uses: ./.github/actions/setup
       - run: npm run gate:architecture
 
@@ -65,7 +65,7 @@ jobs:
     name: security
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
       - run: npm run gate:semgrep
@@ -76,7 +76,7 @@ jobs:
     name: suppressions
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
@@ -86,7 +86,7 @@ jobs:
     name: ratchet
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup
@@ -96,7 +96,7 @@ jobs:
     name: lane
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 0
       - uses: ./.github/actions/setup

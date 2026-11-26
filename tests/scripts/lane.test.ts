@@ -255,12 +255,12 @@ describe('the lane config and the files that carry it', () => {
     expect(page).toContain(config.ruleVersion);
   });
 
-  it('CODEOWNERS covers a sample path of every red pattern with the placeholder team', () => {
+  it('CODEOWNERS covers a sample path of every red pattern with the owner', () => {
     const lines = readFileSync(join(root, '.github', 'CODEOWNERS'), 'utf8')
       .split('\n')
       .filter((line) => line.trim() !== '' && !line.startsWith('#'));
     for (const line of lines) {
-      expect(line.split(/\s+/).slice(1)).toEqual(['@OWNER/gate-owners']);
+      expect(line.split(/\s+/).slice(1)).toEqual(['@juliensimon']);
     }
     const owned = ignore().add(lines.map((line) => line.split(/\s+/)[0]!));
     const samples = [

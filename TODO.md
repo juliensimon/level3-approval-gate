@@ -4,7 +4,7 @@
 
 Placeholders to replace:
 
-- [ ] `.github/CODEOWNERS`: replace every `@OWNER/gate-owners` with your real team. The team needs write access and must contain people only, never an agent or a bot.
+- [x] `.github/CODEOWNERS`: owner is `@juliensimon`. A fork replaces it with a team of people, never an agent or a bot.
 - [ ] `LICENSE`: confirm the copyright holder.
 - [ ] `LANES.md`: fill the sign-off table (legal, security, insurance, gate owner).
 - [ ] `policy/change-management-clause.md`: fill the items in square brackets in your own copy of the clause.

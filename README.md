@@ -33,7 +33,7 @@ This repository is set up for step 2. The green lane is `docs/internal/**` and n
 |---|---|
 | `src/`, `tests/`, `specs/` | The sample service: invoice totals with volume discounts and tax. Five numbered specs, one acceptance test file per spec |
 | `LANES.md`, `gate/lanes.json` | The lane page and the path patterns that `scripts/lane.ts` reads |
-| `.github/CODEOWNERS` | The red lane and the gate's own files, owned by a team of people (placeholder: `@OWNER/gate-owners`) |
+| `.github/CODEOWNERS` | The red lane and the gate's own files, owned by a person or a team of people (`@juliensimon` here) |
 | `.github/workflows/gate.yml` | The gate: nine required checks, one job each |
 | `rulesets/main.json` | The branch ruleset: required checks, required review, code owner review, no force pushes, no bypass |
 | `gate/baseline.json` | The limits the gate enforces. The ratchet lets them tighten and never loosen |
@@ -88,7 +88,7 @@ npx tsx scripts/cli.ts lane docs/internal/runbook.md .github/workflows/gate.yml 
 You need a GitHub organization on a plan that includes Copilot code review, and Docker for the security scans.
 
 1. **Fork or copy this repository** into your organization. Keep `main` as the default branch.
-2. **Replace the placeholder owner.** In `.github/CODEOWNERS`, replace `@OWNER/gate-owners` with your team of people.
+2. **Replace the owner.** In `.github/CODEOWNERS`, replace `@juliensimon` with your team of people.
 3. **Run the gate locally.** `npm ci`, then `npm run gate:local`. Then run the three scans: `npm run gate:semgrep`, `npm run gate:gitleaks`, `npm run gate:osv`.
 4. **Open one pull request** so the nine checks run once on GitHub.
 5. **Import the ruleset.** In the repository settings, import `rulesets/main.json` as a branch ruleset. It requires the nine checks, one approval, a code owner review, and a fresh approval after each push. It blocks force pushes and lists no bypass actor.
