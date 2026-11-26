@@ -31,3 +31,5 @@ The gate owners named in `.github/CODEOWNERS` own the rules. Any engineer can as
 ## Reading a gate result
 
 Each check reports one line in the pull request. Open the failing check, read the first error, and fix the cause. Do not add a suppression to make a check pass.
+
+Keep each line of a gate result short.
