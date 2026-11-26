@@ -18,7 +18,7 @@ Every way a change can go is an open or merged pull request in this repository. 
 | [#6](../../pull/6) | A complexity limit raised | Red | `ratchet` failed. Blocked. |
 | [#7](../../pull/7) | New code with no test | Amber | `lint` and `tests` failed. Blocked. |
 | [#8](../../pull/8) | A forbidden import between layers | Amber | `architecture` failed, with `lint`, `tests` and `types`. Blocked. |
-| [#9](../../pull/9) | A fake API key committed | Amber | `security` failed: gitleaks found the key. Blocked. |
+| [#9](../../pull/9) | A fake API key committed | Amber | `security` failed: gitleaks found the key. `tests` failed too, on coverage. Blocked. |
 
 ## The idea
 
